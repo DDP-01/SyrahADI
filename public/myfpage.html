@@ -1,0 +1,105 @@
+<html>
+  <head>
+    <script src="jquery.js"></script>
+    <script type="text/javascript">
+      var totalpage = 10;
+      function dosubmit(){
+        var prepage = document.getElementById("presentpage");
+        var fpage   = document.getElementById("ttpage");
+        if(fpage.value>0 && fpage.value<=totalpage){
+          if(prepage.value == fpage.value)
+            alert("You are already at page "+prepage.value+"!");
+          else{
+            prepage.value = fpage.value;
+            var condition;
+            var jsonstr = '{"condition":"' + condition +
+                          '","page":"' + prepage.value +
+                          '","num":"20"}';
+            var json = JSON.parse(jsonstr);
+            $.post("/query",json,function(data){
+              /*
+              Here is the code for dealing with the data from server.
+              */
+            });
+          }
+        }
+        else
+          alert("Page out of range!");
+        return true;
+      }
+
+      $(document).ready(function(){
+
+        $(".previous").click(function(){
+          var prepage=document.getElementById("presentpage");
+          if(prepage.value>1){
+            prepage.value --;
+            var condition;
+            var jsonstr = '{"condition":"' + condition +
+                          '","page":"' + prepage.value +
+                          '","num":"20"}';
+            var json = JSON.parse(jsonstr);
+            $.post("/query",json,function(data){
+              /*
+              Here is the code for dealing with the data from server.
+              */
+            });
+          }
+          else
+            alert("You are at the first page!");
+        });
+
+        $(".next").click(function(){
+          var prepage=document.getElementById("presentpage");
+          if(prepage.value < totalpage){
+            prepage.value ++;
+            var condition;
+            var jsonstr = '{"condition":"' + condition +
+                          '","page":"' + prepage.value +
+                          '","num":"20"}';
+            var json = JSON.parse(jsonstr);
+            $.post("/query",json,function(data){
+              /*
+              Here is the code for dealing with the data from server.
+              */
+            });
+          }
+          else
+            alert("You are at the last page!");
+        });
+      });
+    </script>
+    <style type="text/css">
+      button.previous,button.next{
+        color:black;
+      }
+      span.present{
+        color:red;
+      }
+      input.presentpage{
+        color:red;
+        width:25px;
+        border:0;
+      }
+      input.flippage{
+        width:40px;
+      }
+    </style>
+    <script language="javascript" type="text/javascript">
+      var
+    </script>
+  </head>
+
+  <body>
+    <form method="post" >
+        <span class="present">present page:</span>
+        <input class="presentpage" id="presentpage" value="1" /><span style="color:red">total pages:</span><input class="presentpage" type="text" id="totalpage" value="10">
+        <br />
+        <button class="previous" type="button">previous page</button>
+        <button class="next" type="button">next page</button>
+        turn to page
+        <input class="flippage" id="ttpage" value="1" />
+        <button type="button" onclick="dosubmit();">go</button>
+    </form>
+  </body>
+</html>
