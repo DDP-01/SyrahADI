@@ -1,3 +1,9 @@
+node_modules
+down
+upload
+.DS_Store
+
+
 # Logs
 logs
 *.log

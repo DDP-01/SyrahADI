@@ -1,2 +1,0 @@
-# SyrahADI
-SyrahADI
